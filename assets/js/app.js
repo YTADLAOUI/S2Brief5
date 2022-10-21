@@ -5,6 +5,8 @@
   let data=[]
    const saveTitle =document.getElementById('recipient-name');
    const saveBtn = document.getElementById('save');
+   const editBtn = document.getElementById ('edit');
+   const deletBtn = document.getElementById ('delete');
    const savePriority=document.getElementById('Priority');
    const statusform = document.getElementById('status');
    let recipientDate  = document.getElementById('recipient-date');
@@ -14,7 +16,7 @@
    let toDo2 = document.getElementById('to-do-tasks2')
    let toDo3 = document.getElementById('to-do-tasks3')
    
-   
+   var index;
    function createTask() {
     // initialiser task form
     toDo.innerHTML=''
@@ -22,9 +24,13 @@
     toDo3.innerHTML=''
 
     for(let i=0; i<tasks.length ;i++){
+        
         if( tasks[i].status=="To Do"){
+             
              toDo.innerHTML+=`
-             <button onclick=editTask(${i}) class="w-100 border-0 d-flex bg-white border-bottom ">
+             <button 
+             data-bs-toggle="modal" data-bs-target="#modal"
+             onclick="editTask(${i}),index(${i})" class="w-100 border-0 d-flex bg-white border-bottom ">
 								<div class="col-1 mt-1">
 									<i class="bi bi-question-circle h4 text-green "></i> 
 								</div>
@@ -37,15 +43,15 @@
 									<div class="h5">
 										<span class="btn btn-sm btn-primary p-0 px-1 ">${tasks[i].priority}</span>
 										<span class="btn btn-sm btn-light text-black p-0 px-1 ">${tasks[i].type}</span>
-                                         <span class="btn btn-sm btn-light text-black p-0 px-1 ">updeat</span>
-                                         <span class="btn btn-sm btn-primary p-0 px-1 ">supprimer</span>
                                          </div>
 				</div>
 			</button>
              `
         }else if(tasks[i].status=="In Progress"){
             toDo2.innerHTML+= `
-            <button onclick=editTask(${i}) class="w-100 border-0 d-flex bg-white border-bottom ">
+            <button 
+            data-bs-toggle="modal" data-bs-target="#modal"
+             onclick=editTask(${i}) class="w-100 border-0 d-flex bg-white border-bottom ">
             <div class="col-1 mt-1">
                 <i class="spinner-border text-success spinner-border-sm"></i> 
             </div>
@@ -58,14 +64,14 @@
                 <div class="h5">
                     <span class="btn btn-sm btn-primary p-0 px-1 ">${tasks[i].priority}</span>
                     <span class="btn btn-sm btn-light text-black p-0 px-1 ">${tasks[i].type}</span>
-                    <span class="btn btn-sm btn-light text-black p-0 px-1 ">updeat</span>
-                    <span class="btn btn-sm btn-primary p-0 px-1 ">supprimer</span>
                 </div>
 </div>
 </button>
         `}else if(tasks[i].status=="Done"){
             toDo3.innerHTML+= `
-            <button onclick=editTask(${i}) class="w-100 border-0 d-flex bg-white border-bottom ">
+            <button 
+            data-bs-toggle="modal" data-bs-target="#modal"
+            onclick=editTask(${i}) class="w-100 border-0 d-flex bg-white border-bottom ">
             <div class="col-1 mt-1">
                 <i class="bi bi-check-circle h4 text-green "></i> 
             </div>
@@ -78,8 +84,7 @@
                      <div class="h5">
                          <span class="btn btn-sm btn-primary p-0 px-1 ">${tasks[i].priority}</span>
                          <span class="btn btn-sm btn-light text-black p-0 px-1 ">${tasks[i].type}</span>
-                         <span class="btn btn-sm btn-light text-black p-0 px-1 ">updeat</span>
-                         <span class="btn btn-sm btn-primary p-0 px-1 ">supprimer</span>
+                        
                     </div>
                </div>
             </button>
@@ -120,10 +125,18 @@ function saveTask() {
     
     }
 
+
 function editTask(index) {
-    let taskIndex = index;
-    
-    return taskIndex
+    saveBtn.style.display="none";
+    editBtn.style.display="block";
+    deletBtn.style.display="block";
+
+    saveTitle.value=tasks[index].title;
+    document.querySelector(".form-check-input:checked").value=tasks[index].type;
+    savePriority.value=tasks[index].priority;
+    statusform.value=tasks[index].status;
+    recipientDate.value=tasks[index].date;
+    message.value=tasks[index].description;
     // Initialisez task form
 
     // Affichez updates
@@ -137,9 +150,15 @@ function editTask(index) {
     // Ouvrir Modal form
 }
 
+function addTaskk(){
+    saveBtn.style.display="block";
+    editBtn.style.display="none";
+    deletBtn.style.display="none";
+}
+
 function updateTask() {
     // GET TASK ATTRIBUTES FROM INPUTS
-
+   
     // Créez task object
 
     // Remplacer ancienne task par nouvelle task
