@@ -13,11 +13,13 @@
    let toDo = document.getElementById('to-do-tasks1')
    let toDo2 = document.getElementById('to-do-tasks2')
    let toDo3 = document.getElementById('to-do-tasks3')
+   
+   function createTask() {
+    // initialiser task form
     toDo.innerHTML=''
     toDo2.innerHTML=''
     toDo3.innerHTML=''
-   function createTask() {
-    // initialiser task form
+
     for(let i=0; i<data.length ;i++){
         if( data[i].status=="To do"){
              toDo.innerHTML+=`
@@ -38,8 +40,8 @@
 				</div>
 			</button>
              `
-        }else if(data[i].status=="In progress"){
-            `
+        }else if(data[i].status=="progress"){
+            toDo2.innerHTML+= `
             <button class="w-100 border-0 d-flex bg-white border-bottom ">
                 <div class="col-1 mt-1">
                     <i class="spinner-border text-success spinner-border-sm "></i> 
@@ -51,21 +53,38 @@
                         <div class="">$</div>
                     </div>
                     <div class="h5">
-                        <span class="btn btn-sm btn-primary p-0 px-1 ">High</span>
-                        <span class="btn btn-sm btn-light text-black p-0 px-1 ">Bug</span>
+                        <span class="btn btn-sm btn-primary p-0 px-1 ">${data[i].priority}</span>
+                        <span class="btn btn-sm btn-light text-black p-0 px-1 ">${data[i].type}</span>
                     </div>
                 </div>
             </button>
-`
-
+        `}else if(data[i].status=="Done"){
+            toDo3.innerHTML+= `
+            <button class="w-100 border-0 d-flex bg-white border-bottom ">
+                <div class="col-1 mt-1">
+                    <i class="spinner-border text-success spinner-border-sm "></i> 
+                </div>
+                <div class="text-start col-11 mt-1">
+                    <div class="fw-bold">${data[i].title}</div>
+                    <div class="">
+                        <div class="">#${i+1} created in ${data[i].date}</div>
+                        <div class="">$</div>
+                    </div>
+                    <div class="h5">
+                        <span class="btn btn-sm btn-primary p-0 px-1 ">${data[i].priority}</span>
+                        <span class="btn btn-sm btn-light text-black p-0 px-1 ">${data[i].type}</span>
+                    </div>
+                </div>
+            </button>
+    `
         }
-    }
     
     // Afficher le boutton save
     
     // Ouvrir modal form
     
 }
+   }
 
 function saveTask() {
     // Recuperer task attributes a partir les champs input
@@ -80,12 +99,13 @@ function saveTask() {
     }
     // Créez task object
     data.push(objectsTask)
-    reloadTasks()
+    
     // Ajoutez object au Array
 
 
     // refresh tasks
     console.log(data);
+    createTask()
     
     }
 
@@ -135,5 +155,5 @@ function initTaskForm() {
 function reloadTasks() {
     // Remove tasks elements
    
-    // Set Task count
+     // Set Task coun
 }
