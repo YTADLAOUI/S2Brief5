@@ -37,7 +37,9 @@
 									<div class="h5">
 										<span class="btn btn-sm btn-primary p-0 px-1 ">${tasks[i].priority}</span>
 										<span class="btn btn-sm btn-light text-black p-0 px-1 ">${tasks[i].type}</span>
-									</div>
+                                         <span class="btn btn-sm btn-light text-black p-0 px-1 ">updeat</span>
+                                         <span class="btn btn-sm btn-primary p-0 px-1 ">supprimer</span>
+                                         </div>
 				</div>
 			</button>
              `
@@ -56,6 +58,8 @@
                 <div class="h5">
                     <span class="btn btn-sm btn-primary p-0 px-1 ">${tasks[i].priority}</span>
                     <span class="btn btn-sm btn-light text-black p-0 px-1 ">${tasks[i].type}</span>
+                    <span class="btn btn-sm btn-light text-black p-0 px-1 ">updeat</span>
+                    <span class="btn btn-sm btn-primary p-0 px-1 ">supprimer</span>
                 </div>
 </div>
 </button>
@@ -74,6 +78,8 @@
                      <div class="h5">
                          <span class="btn btn-sm btn-primary p-0 px-1 ">${tasks[i].priority}</span>
                          <span class="btn btn-sm btn-light text-black p-0 px-1 ">${tasks[i].type}</span>
+                         <span class="btn btn-sm btn-light text-black p-0 px-1 ">updeat</span>
+                         <span class="btn btn-sm btn-primary p-0 px-1 ">supprimer</span>
                     </div>
                </div>
             </button>
@@ -116,6 +122,7 @@ function saveTask() {
 
 function editTask(index) {
     let taskIndex = index;
+    
     return taskIndex
     // Initialisez task form
 
