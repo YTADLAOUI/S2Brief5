@@ -2,7 +2,6 @@
  * In this file app.js you will find all CRUD functions name.
  * 
  */
-  let data=[]
    const saveTitle =document.getElementById('recipient-name');
    const saveBtn = document.getElementById('save');
    const editBtn = document.getElementById ('edit');
@@ -12,9 +11,16 @@
    let recipientDate  = document.getElementById('recipient-date');
    let message = document.getElementById('message-text');
    saveBtn.addEventListener('click',saveTask);
+
    let toDo = document.getElementById('to-do-tasks1')
    let toDo2 = document.getElementById('to-do-tasks2')
    let toDo3 = document.getElementById('to-do-tasks3')
+
+
+
+  
+   
+   
    
    var index;
    function createTask() {
@@ -23,10 +29,16 @@
     toDo2.innerHTML=''
     toDo3.innerHTML=''
 
+    document.getElementById('todo-count').innerHTML = 0;
+    document.getElementById('In-progress-count').innerHTML = 0;
+    document.getElementById('done-count').innerHTML = 0;
+
+
     for(let i=0; i<tasks.length ;i++){
         
         if( tasks[i].status=="To Do"){
-             
+            
+           document.getElementById('todo-count').innerHTML++;
              toDo.innerHTML+=`
              <button 
              data-bs-toggle="modal" data-bs-target="#modal"
@@ -45,9 +57,16 @@
 										<span class="btn btn-sm btn-light text-black p-0 px-1 ">${tasks[i].type}</span>
                                          </div>
 				</div>
+                
 			</button>
+            
              `
+             
+             
+                        
+
         }else if(tasks[i].status=="In Progress"){
+            document.getElementById('In-progress-count').innerHTML++;
             toDo2.innerHTML+= `
             <button 
             data-bs-toggle="modal" data-bs-target="#modal"
@@ -65,9 +84,14 @@
                     <span class="btn btn-sm btn-primary p-0 px-1 ">${tasks[i].priority}</span>
                     <span class="btn btn-sm btn-light text-black p-0 px-1 ">${tasks[i].type}</span>
                 </div>
-</div>
-</button>
-        `}else if(tasks[i].status=="Done"){
+            </div>
+         </button> 
+         `
+         
+         
+            }
+            else if(tasks[i].status=="Done"){
+            document.getElementById('done-count').innerHTML++;
             toDo3.innerHTML+= `
             <button 
             data-bs-toggle="modal" data-bs-target="#modal"
@@ -89,6 +113,8 @@
                </div>
             </button>
                              `
+              
+
         }
     
     
@@ -103,7 +129,7 @@ function saveTask() {
     else{
         let objectsTask =
     {
-        title         : saveTitle.value,
+        title         : saveTitle.value ,
         type          : document.querySelector(".form-check-input:checked").value,
         priority      : savePriority.value,
         status        : statusform.value,
@@ -111,6 +137,7 @@ function saveTask() {
         description   : message.value,
     }
     tasks.push(objectsTask)
+    
     
     // Ajoutez object au Array
 
