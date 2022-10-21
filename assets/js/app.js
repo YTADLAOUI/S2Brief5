@@ -15,6 +15,7 @@
    let toDo = document.getElementById('to-do-tasks1')
    let toDo2 = document.getElementById('to-do-tasks2')
    let toDo3 = document.getElementById('to-do-tasks3')
+   var indexx;
 
 
 
@@ -158,6 +159,8 @@ function editTask(index) {
     editBtn.style.display="block";
     deletBtn.style.display="block";
 
+    indexx = index;
+
     saveTitle.value=tasks[index].title;
     document.querySelector(".form-check-input:checked").value=tasks[index].type;
     savePriority.value=tasks[index].priority;
@@ -186,7 +189,14 @@ function addTaskk(){
 function updateTask() {
     // GET TASK ATTRIBUTES FROM INPUTS
    
+    tasks[indexx].title=saveTitle.value;
+    tasks[indexx].type=document.querySelector(".form-check-input:checked").value;
+    tasks[indexx].priority=savePriority.value;
+    tasks[indexx].status=statusform.value;
+    tasks[indexx].date=recipientDate.value;
+    tasks[indexx].description=message.value;
     // Créez task object
+    createTask();
 
     // Remplacer ancienne task par nouvelle task
 
@@ -200,7 +210,8 @@ function deleteTask() {
     // Get index of task in the array
 
     // Remove task from array by index splice function
-
+  tasks.splice(indexx,1)
+  createTask();
     // close modal form
 
     // refresh tasks
