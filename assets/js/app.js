@@ -142,7 +142,7 @@ function saveTask() {
 
         // refresh tasks
         createTask()
-        reloadTasks();
+        clearTasks();
     }
     // Créez task object
 
@@ -224,11 +224,11 @@ function initTaskForm() {
     saveBtn.style.display = "block";
     editBtn.style.display = "none";
     deletBtn.style.display = "none";
-    reloadTasks()
+    clearTasks()
         // Hide all action buttons
 }
 
-function reloadTasks() {
+function clearTasks() {
     // Remove tasks elements
     let inputs = document.querySelectorAll('input')
     let tex = document.querySelector('textarea')
